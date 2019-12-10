@@ -32,37 +32,37 @@ const Copyright = styled.span`
 export default () => (
   <Footer>
     <List>
-      <ListItem>
+      <ListItem key={0}>
         <Link href="#">about us</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={1}>
         <Link href="#">support</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={2}>
         <Link href="#">press</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={3}>
         <Link href="#">api</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={4}>
         <Link href="#">jobs</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={5}>
         <Link href="#">privacy</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={6}>
         <Link href="#">terms</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={7}>
         <Link href="#">directory</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={8}>
         <Link href="#">profiles</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={9}>
         <Link href="#">hashtags</Link>
       </ListItem>
-      <ListItem>
+      <ListItem key={10}>
         <Link href="#">language</Link>
       </ListItem>
     </List>
