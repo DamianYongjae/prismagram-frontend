@@ -11,7 +11,7 @@ const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3 linear;
+  transition: opacity 0.3s linear;
   svg {
     fill: white;
   }
@@ -21,10 +21,10 @@ const Container = styled.div`
   background-image: url(${props => props.bg});
   background-size: cover;
   cursor: pointer;
-  &:hover{
-      &{Overlay} {
-          opacity: 1;
-      }
+  &:hover {
+    ${Overlay} {
+      opacity: 1;
+    }
   }
 `;
 
