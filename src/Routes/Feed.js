@@ -6,7 +6,7 @@ import { useQuery } from "react-apollo-hooks";
 import Loader from "../Components/Loader";
 import Post from "../Components/Post";
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
   {
     seeFeed {
       id
@@ -22,6 +22,7 @@ const FEED_QUERY = gql`
         url
       }
       likeCount
+      commentCount
       isLiked
       comments {
         id
@@ -55,7 +56,7 @@ export default () => {
       {!loading &&
         data &&
         data.seeFeed &&
-        data.seeFeed.map(post => (
+        data.seeFeed.map((post) => (
           <Post
             key={post.id}
             id={post.id}
@@ -67,6 +68,7 @@ export default () => {
             isLiked={post.isLiked}
             comments={post.comments}
             createdAt={post.createdAt}
+            isSingle={false}
           />
         ))}
     </Wrapper>

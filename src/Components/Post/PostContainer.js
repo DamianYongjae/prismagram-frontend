@@ -15,7 +15,8 @@ const PostContainer = ({
   comments,
   createdAt,
   caption,
-  location
+  location,
+  isSingle,
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
@@ -23,10 +24,10 @@ const PostContainer = ({
   const [selfComments, setSelfComments] = useState([]);
   const comment = useInput("");
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
-    variables: { postId: id }
+    variables: { postId: id },
   });
   const [addCommentMutation] = useMutation(ADD_COMMENT, {
-    variables: { postId: id, text: comment.value }
+    variables: { postId: id, text: comment.value },
   });
 
   useEffect(() => {
@@ -49,13 +50,13 @@ const PostContainer = ({
     toggleLikeMutation();
   };
 
-  const onKeyPress = async event => {
+  const onKeyPress = async (event) => {
     const { which } = event;
     if (which === 13) {
       event.preventDefault();
       try {
         const {
-          data: { addComment }
+          data: { addComment },
         } = await addCommentMutation();
         setSelfComments([...selfComments, addComment]);
         comment.setValue("");
@@ -83,6 +84,7 @@ const PostContainer = ({
       toggleLike={toggleLike}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
+      isSingle={isSingle}
     />
   );
 };
@@ -92,12 +94,12 @@ PostContainer.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
     avatar: PropTypes.string,
-    username: PropTypes.string.isRequired
+    username: PropTypes.string.isRequired,
   }).isRequired,
   files: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired
+      url: PropTypes.string.isRequired,
     })
   ).isRequired,
   likeCount: PropTypes.number.isRequired,
@@ -108,13 +110,13 @@ PostContainer.propTypes = {
       text: PropTypes.string.isRequired,
       user: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired
-      }).isRequired
+        username: PropTypes.string.isRequired,
+      }).isRequired,
     })
   ).isRequired,
   createdAt: PropTypes.string.isRequired,
   caption: PropTypes.string,
-  location: PropTypes.string.isRequired
+  location: PropTypes.string.isRequired,
 };
 
 export default PostContainer;

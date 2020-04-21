@@ -45,7 +45,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
           {data.searchUser.length === 0 ? (
             <FatText text="No users Found" />
           ) : (
-            data.searchUser.map(user => (
+            data.searchUser.map((user) => (
               <UserCard
                 key={user.id}
                 username={user.username}
@@ -61,9 +61,10 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
           {data.searchPost.length === 0 ? (
             <FatText text="No posts Found" />
           ) : (
-            data.searchPost.map(post => (
+            data.searchPost.map((post) => (
               <SquarePost
                 key={post.id}
+                id={post.id}
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
                 file={post.files[0]}
@@ -78,7 +79,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
 
 SearchPresenter.prototype = {
   searchTerm: PropTypes.string,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 };
 
 export default SearchPresenter;

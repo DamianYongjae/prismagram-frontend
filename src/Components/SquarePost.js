@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
 import { HeartFull, CommentFull } from "./Icons";
 
 const Overlay = styled.div`
@@ -18,7 +20,7 @@ const Overlay = styled.div`
 `;
 
 const Container = styled.div`
-  background-image: url(${props => props.bg});
+  background-image: url(${(props) => props.bg});
   background-size: cover;
   cursor: pointer;
   &:hover {
@@ -42,25 +44,30 @@ const NumberText = styled.span`
   font-size: 16px;
 `;
 
-const SquarePost = ({ likeCount, commentCount, file }) => (
-  <Container bg={file.url}>
-    <Overlay>
-      <Number>
-        <HeartFull />
-        <NumberText>{likeCount}</NumberText>
-      </Number>
-      <Number>
-        <CommentFull />
-        <NumberText>{commentCount}</NumberText>
-      </Number>
-    </Overlay>
-  </Container>
-);
+const SquarePost = ({ id, likeCount, commentCount, file }) => {
+  let toAddr = `/postId?id=${id}`;
+  return (
+    <Container bg={file.url}>
+      <Link to={toAddr}>
+        <Overlay>
+          <Number>
+            <HeartFull />
+            <NumberText>{likeCount}</NumberText>
+          </Number>
+          <Number>
+            <CommentFull />
+            <NumberText>{commentCount}</NumberText>
+          </Number>
+        </Overlay>
+      </Link>
+    </Container>
+  );
+};
 
 SquarePost.propTypes = {
   likeCount: PropTypes.number.isRequired,
   commentCount: PropTypes.number.isRequired,
-  file: PropTypes.string.isRequired
+  file: PropTypes.object.isRequired,
 };
 
 export default SquarePost;

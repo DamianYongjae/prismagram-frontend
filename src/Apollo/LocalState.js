@@ -1,5 +1,5 @@
 export const defaults = {
-  isLoggedIn: Boolean(localStorage.getItem("token")) || false
+  isLoggedIn: Boolean(localStorage.getItem("token")) || false,
 };
 
 export const resolvers = {
@@ -8,15 +8,15 @@ export const resolvers = {
       localStorage.setItem("token", token);
       cache.writeData({
         data: {
-          isLoggedIn: true
-        }
+          isLoggedIn: true,
+        },
       });
       return null;
     },
     logUserOut: (_, __, { cache }) => {
       localStorage.removeItem("token");
-      window.location.reload();
+      window.location = "/";
       return null;
-    }
-  }
+    },
+  },
 };
