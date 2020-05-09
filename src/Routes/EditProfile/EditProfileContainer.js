@@ -4,15 +4,20 @@ import useInput from "../../Hooks/useInput";
 import { toast } from "react-toastify";
 import { EDIT_PROFILE } from "./EditProfileQueries";
 import EditProfilePresenter from "./EditProfilePresenter";
+import { Link } from "react-router-dom";
 
-export default () => {
+export default (props) => {
+  if (props.location.state === undefined) {
+    return <Link to="/" />;
+  }
+  const user = props.location.state.data.seeUser;
   const [confirm, setConfirm] = useState("");
-  const newUsername = useInput("");
-  const newFirstName = useInput("");
-  const newLastName = useInput("");
-  const newBio = useInput("");
-  const newEmail = useInput("");
-  const newAvatar = useInput("");
+  const newUsername = useInput(user.username);
+  const newFirstName = useInput(user.firstName);
+  const newLastName = useInput(user.lastName);
+  const newBio = useInput(user.bio);
+  const newEmail = useInput(user.email);
+  const newAvatar = useInput(user.avatar);
 
   const [editProfileMutation] = useMutation(EDIT_PROFILE, {
     variables: {

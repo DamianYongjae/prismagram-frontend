@@ -115,10 +115,17 @@ export default ({ data, loading, logOut }) => {
               <Username>{username}</Username>
               {isSelf ? (
                 <ButtonRow>
-                  <Link to="/editProfile">
+                  <Link
+                    to={{
+                      pathname: "/editProfile",
+                      state: {
+                        data,
+                      },
+                    }}
+                  >
                     <Button text="Edit Profile" />
                   </Link>
-                  <Button onClick={logOut} text="Log Out" />
+                  <Button onClick={() => logOut()} text="Log Out" />
                 </ButtonRow>
               ) : (
                 <FollowButton id={id} isFollowing={isFollowing} />

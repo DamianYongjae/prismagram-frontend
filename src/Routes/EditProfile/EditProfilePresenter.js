@@ -120,8 +120,9 @@ export default ({
 
   if (!loading) {
     const {
-      me: { avatar, username, fullName, bio, email, lastName, firstName },
+      me: { avatar, username, fullName },
     } = data;
+
     if (confirm === "") {
       return (
         <Wrapper>
@@ -147,7 +148,7 @@ export default ({
                   <Title>Username</Title>
                   <Value>
                     <EditInput
-                      placeholder={username}
+                      placeholder={"Input username"}
                       value={newUsername.value}
                       onChange={newUsername.onChange}
                     />
@@ -157,7 +158,7 @@ export default ({
                   <Title>First Name</Title>
                   <Value>
                     <EditInput
-                      placeholder={firstName}
+                      placeholder={"Input first name"}
                       value={newFirstName.value}
                       onChange={newFirstName.onChange}
                     />
@@ -167,7 +168,7 @@ export default ({
                   <Title>Last Name</Title>
                   <Value>
                     <EditInput
-                      placeholder={lastName}
+                      placeholder={"Input last name"}
                       value={newLastName.value}
                       onChange={newLastName.onChange}
                     />
@@ -177,7 +178,7 @@ export default ({
                   <Title>E-Mail</Title>
                   <Value>
                     <EditInput
-                      placeholder={email}
+                      placeholder={"Input E-mail address"}
                       value={newEmail.value}
                       onChange={newEmail.onChange}
                     />
@@ -187,7 +188,7 @@ export default ({
                   <Title>Avatar</Title>
                   <Value>
                     <EditInput
-                      placeholder={avatar}
+                      placeholder={"Input avatar url"}
                       value={newAvatar.value}
                       onChange={newAvatar.onChange}
                     />
@@ -197,7 +198,7 @@ export default ({
                   <Title>Bio</Title>
                   <Value>
                     <Textarea
-                      placeholder={bio}
+                      placeholder={"input Bio"}
                       value={newBio.value}
                       onChange={newBio.onChange}
                     />
