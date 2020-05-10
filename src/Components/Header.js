@@ -91,7 +91,9 @@ export default withRouter(({ history }) => {
           <HeaderLink to="/explore">
             <Compass />
           </HeaderLink>
-          <HeaderLink to="/notifications">
+          <HeaderLink
+            to={{ pathname: "/notifications", state: { hello: true } }}
+          >
             <HeartEmpty />
           </HeaderLink>
           {!data ? (
@@ -99,9 +101,11 @@ export default withRouter(({ history }) => {
               <User />
             </HeaderLink>
           ) : (
-            <HeaderLink to={data.me.username}>
-              <User />
-            </HeaderLink>
+            <>
+              <HeaderLink to={data.me.username}>
+                <User />
+              </HeaderLink>
+            </>
           )}
         </HeaderColumn>
       </HeaderWrapper>

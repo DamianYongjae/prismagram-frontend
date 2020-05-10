@@ -13,6 +13,7 @@ import Profile from "../Routes/Profile";
 import EditProfile from "../Routes/EditProfile";
 import Search from "../Routes/Search";
 import Post from "../Routes/Post";
+import Notifications from "../Routes/Notifications";
 
 const LoggedInRoutes = () => (
   <Router>
@@ -22,6 +23,7 @@ const LoggedInRoutes = () => (
       <Route path="/editProfile" component={EditProfile} />
       <Route path="/search" component={Search} />
       <Route path="/postId" component={Post} />
+      <Route path="/notifications" component={Notifications} />
       <Route path="/:username" component={Profile} />
       <Redirect from="*" to="/" />
     </Switch>
