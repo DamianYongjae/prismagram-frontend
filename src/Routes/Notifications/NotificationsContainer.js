@@ -4,8 +4,7 @@ import { useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQuery";
 import NotificationsPresenter from "./NotificationsPresenter";
 import Loader from "../../Components/Loader";
-import Feed from "../Feed";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export const NOTI_QUERY = gql`
   query seeUser($username: String!) {
@@ -64,7 +63,6 @@ export default () => {
   }
 
   if (!done && Object.keys(user).length !== 0) {
-    console.log(done, user);
     const { data: userInfo, loading } = useQuery(NOTI_QUERY, {
       variables: {
         username: user.me.username,
@@ -84,6 +82,6 @@ export default () => {
       return <Loader />;
     }
   } else {
-    return <Link to="/" />;
+    return <Redirect to="/" />;
   }
 };
