@@ -19,11 +19,11 @@ const LoggedInRoutes = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={Feed}></Route>
+      <Route path="/notifications" component={Notifications} />
       <Route path="/explore" component={Explore} />
       <Route path="/editProfile" component={EditProfile} />
       <Route path="/search" component={Search} />
       <Route path="/postId" component={Post} />
-      <Route path="/notifications" component={Notifications} />
       <Route path="/:username" component={Profile} />
       <Redirect from="*" to="/" />
     </Switch>

@@ -99,8 +99,8 @@ const Image = styled.img`
   height: 50px;
 `;
 
-export default (props) => {
-  const { data: user } = useQuery(ME);
+export default () => {
+  const { data: user, loading: done } = useQuery(ME);
 
   function compare(a, b) {
     const date1 = a.createdAt;
@@ -116,7 +116,7 @@ export default (props) => {
     return comparison;
   }
 
-  if (user !== undefined) {
+  if (!done && user !== undefined) {
     const username = user.me.username;
     const { data, loading } = useQuery(NOTI_QUERY, {
       variables: {
@@ -132,7 +132,7 @@ export default (props) => {
           <Loader />
         </Wrapper>
       );
-    } else {
+    } else if (data !== undefined) {
       const { posts } = data.seeUser;
       const commentList = [];
       const likeList = [];
@@ -186,8 +186,10 @@ export default (props) => {
           </NotiContainer>
         </Wrapper>
       );
+    } else {
+      return <Loader />;
     }
   } else {
-    return <Loader />;
+    return <Link to="/" />;
   }
 };
