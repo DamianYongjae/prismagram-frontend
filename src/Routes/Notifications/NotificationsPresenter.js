@@ -86,8 +86,20 @@ export default ({ username, compare, userInfo, loading, done }) => {
       });
 
       let notiList = commentList.concat(likeList).sort(compare);
+      const notiLimitDate = new Date(
+        event.getYear(),
+        event.getMonth() - 1,
+        event.getDay(),
+        event.getHours(),
+        event.getMinutes(),
+        event.getSeconds(),
+        event.getMilliseconds()
+      );
 
-      notiList = notiList.filter((list) => list.user.username !== username);
+      notiList = notiList.filter(
+        (list) =>
+          list.user.username !== username && list.post.createdAt > notiLimitDate
+      );
 
       return (
         <Wrapper>
