@@ -45,15 +45,12 @@ const MetaSection = styled.div`
 
 const ImageSection = styled.div`
   display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
 `;
 
 const Image = styled.img`
   width: 550px;
   height: 80vh;
-  position: relative;
+  position: absolute;
   top: 140px;
   left: 342px;
   background-images: url(${(props) => props.src});

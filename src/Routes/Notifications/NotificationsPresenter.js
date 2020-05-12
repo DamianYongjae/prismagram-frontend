@@ -86,6 +86,7 @@ export default ({ username, compare, userInfo, loading, done }) => {
       });
 
       let notiList = commentList.concat(likeList).sort(compare);
+      const event = new Date();
       const notiLimitDate = new Date(
         event.getYear(),
         event.getMonth() - 1,
