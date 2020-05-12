@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const NotiContainer = styled.div`
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -34,6 +34,7 @@ const NotiContent = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   align-items: center;
+  width: 90%;
 `;
 
 const Avatar = styled.img`
@@ -49,6 +50,12 @@ const Name = styled.span`
   font-size: 15px;
 `;
 
+const TextContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 const Text = styled.span`
   font-size: 15px;
   padding-left: 3px;
@@ -60,6 +67,28 @@ const Image = styled.img`
 `;
 
 export default ({ username, compare, userInfo, loading, done }) => {
+  const getTimeDiff = (postTime, now) => {
+    if (postTime.getMonth() === now.getMonth()) {
+      if (postTime.getDate() === now.getDate()) {
+        if (postTime.getHours() === now.getHours()) {
+          if (postTime.getMinutes() === now.getMinutes()) {
+            return "Just now";
+          } else {
+            return now.getMinutes() - postTime.getMinutes() + " minutes ago";
+          }
+        } else if (postTime.getHours() - now.getHours() === -1) {
+          return "About an hour ago";
+        } else {
+          return "About " + now.getHours() - postTime.getHours() + " hours ago";
+        }
+      } else {
+        return now.getDate() - postTime.getDate() + " days ago";
+      }
+    } else {
+      return now.getDate() - postTime.getDate() + 30 + " days ago";
+    }
+  };
+
   if (!done) {
     if (loading) {
       return (
@@ -86,20 +115,21 @@ export default ({ username, compare, userInfo, loading, done }) => {
       });
 
       let notiList = commentList.concat(likeList).sort(compare);
-      const event = new Date();
+      const now = new Date();
       const notiLimitDate = new Date(
-        event.getYear(),
-        event.getMonth() - 1,
-        event.getDay(),
-        event.getHours(),
-        event.getMinutes(),
-        event.getSeconds(),
-        event.getMilliseconds()
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() - 30,
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds(),
+        now.getMilliseconds()
       );
 
       notiList = notiList.filter(
         (list) =>
-          list.user.username !== username && list.post.createdAt > notiLimitDate
+          list.user.username !== username &&
+          list.createdAt > notiLimitDate.toISOString()
       );
 
       return (
@@ -121,11 +151,21 @@ export default ({ username, compare, userInfo, loading, done }) => {
                       <Link to={`/${list.user.username}`}>
                         <Name>{list.user.username}</Name>
                       </Link>
-                      <Text>
-                        {list.__typename === "Comment"
-                          ? " left comment on your photo."
-                          : " liked your photo."}
-                      </Text>
+                      <TextContainer>
+                        <Text>
+                          {list.__typename === "Comment"
+                            ? " left comment on your photo."
+                            : " liked your photo."}
+                        </Text>
+                        <Text
+                          style={{
+                            fontSize: 10,
+                            color: "gray",
+                          }}
+                        >
+                          {getTimeDiff(new Date(list.createdAt), new Date())}
+                        </Text>
+                      </TextContainer>
                     </InfoContainer>
                     <Link to={`/postId?id=${list.post.id}`}>
                       <Image src={list.post.files[0].url} />
