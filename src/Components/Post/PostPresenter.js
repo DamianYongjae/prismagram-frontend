@@ -31,6 +31,7 @@ const PostSection = styled.div`
   a {
     color: inherit;
   }
+  position: absolute;
 `;
 const MetaSection = styled.div`
   display: flex;
@@ -45,14 +46,14 @@ const MetaSection = styled.div`
 
 const ImageSection = styled.div`
   display: flex;
+  justify-content: flex-end;
+  max-width: 550px;
 `;
 
 const Image = styled.img`
   width: 550px;
   height: 80vh;
   position: absolute;
-  top: 140px;
-  left: 342px;
   background-images: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
@@ -102,7 +103,7 @@ const File = styled.img`
   max-width: 100%;
   width: 100%;
   height: 500px;
-  position: relative;
+  position: absolute;
   top: 0;
   background-images: url(${(props) => props.src});
   background-size: cover;
