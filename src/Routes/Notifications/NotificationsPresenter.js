@@ -79,7 +79,9 @@ export default ({ username, compare, userInfo, loading, done }) => {
         } else if (postTime.getHours() - now.getHours() === -1) {
           return "About an hour ago";
         } else {
-          return "About " + now.getHours() - postTime.getHours() + " hours ago";
+          return `{"About " + ${
+            now.getHours() - postTime.getHours()
+          } + " hours ago"}`;
         }
       } else {
         return now.getDate() - postTime.getDate() + " days ago";
